@@ -1,6 +1,7 @@
 import pandas as pd
 import os
 from PIL import Image
+import hashlib
 
 
 DATASET_PATH = "data/Garbage_Dataset_Classification"
@@ -122,3 +123,58 @@ for _, row in df.iterrows():
 print("\nImage Modes:")
 for mode, count in image_modes.items():
     print(f"{mode}: {count} images")
+
+    print("\nChecking for duplicate images...")
+
+image_hashes = {}
+
+duplicate_images = []
+cross_class_duplicates = []
+
+for _, row in df.iterrows():
+    filename = row["filename"]
+    label = row["label"]
+
+    image_path = os.path.join(IMAGE_PATH, label, filename)
+
+    try:
+        with open(image_path, "rb") as f:
+            file_hash = hashlib.sha256(f.read()).hexdigest()
+
+        if file_hash in image_hashes:
+            previous = image_hashes[file_hash]
+
+            duplicate_images.append({
+                "current": image_path,
+                "duplicate_of": previous["path"]
+            })
+
+            if label != previous["label"]:
+                cross_class_duplicates.append({
+                    "current": image_path,
+                    "current_label": label,
+                    "duplicate_of": previous["path"],
+                    "previous_label": previous["label"]
+                })
+
+        else:
+            image_hashes[file_hash] = {
+                "path": image_path,
+                "label": label
+            }
+
+    except Exception:
+        pass
+
+
+print("Total images:", len(df))
+print("Unique image hashes:", len(image_hashes))
+print("Duplicate images:", len(duplicate_images))
+print("Cross-class duplicates:", len(cross_class_duplicates))
+print("\nCross-class duplicate details:")
+
+for item in cross_class_duplicates:
+    print(f"\nCurrent image: {item['current']}")
+    print(f"Current label: {item['current_label']}")
+    print(f"Duplicate of:  {item['duplicate_of']}")
+    print(f"Previous label: {item['previous_label']}")

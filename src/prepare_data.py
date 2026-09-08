@@ -4,9 +4,7 @@ import pandas as pd
 from sklearn.model_selection import train_test_split
 
 
-# --------------------------------------------------
-# Configuration
-# --------------------------------------------------
+
 
 DATASET_PATH = "data/Garbage_Dataset_Classification"
 METADATA_PATH = os.path.join(DATASET_PATH, "metadata.csv")
@@ -14,9 +12,6 @@ METADATA_PATH = os.path.join(DATASET_PATH, "metadata.csv")
 OUTPUT_PATH = "data/splits"
 
 
-# --------------------------------------------------
-# Load Dataset
-# --------------------------------------------------
 
 print("=" * 50)
 print("DATA PREPARATION")
@@ -29,11 +24,7 @@ print("\nOriginal class distribution:")
 print(df["label"].value_counts())
 
 
-# --------------------------------------------------
-# First Split
-# Train = 70%
-# Temporary = 30%
-# --------------------------------------------------
+
 
 train_df, temp_df = train_test_split(
     df,
@@ -43,14 +34,7 @@ train_df, temp_df = train_test_split(
 )
 
 
-# --------------------------------------------------
-# Second Split
-# Validation = 15%
-# Test = 15%
-#
-# temp = 30%
-# Half of temp = 15%
-# --------------------------------------------------
+
 
 val_df, test_df = train_test_split(
     temp_df,
@@ -60,25 +44,17 @@ val_df, test_df = train_test_split(
 )
 
 
-# --------------------------------------------------
-# Reset Index
-# --------------------------------------------------
+
 
 train_df = train_df.reset_index(drop=True)
 val_df = val_df.reset_index(drop=True)
 test_df = test_df.reset_index(drop=True)
 
 
-# --------------------------------------------------
-# Create Output Directory
-# --------------------------------------------------
+
 
 os.makedirs(OUTPUT_PATH, exist_ok=True)
 
-
-# --------------------------------------------------
-# Save Split Metadata
-# --------------------------------------------------
 
 train_df.to_csv(
     os.path.join(OUTPUT_PATH, "train.csv"),
@@ -95,10 +71,6 @@ test_df.to_csv(
     index=False
 )
 
-
-# --------------------------------------------------
-# Print Results
-# --------------------------------------------------
 
 print("\nSplit completed!")
 

@@ -1,0 +1,14 @@
+{
+    "5379fa50f715756ea408075b56965e55ea29fbdf991cc3f077e781a4ecd41100": {
+        "prediction": "cardboard",
+        "confidence": 0.5315837264060974
+    },
+    "b2023de7e90efba9138279c628555fc2c903f5a69e3820c409b081f0aacfe115": {
+        "prediction": "cardboard",
+        "confidence": 0.9472429156303406
+    },
+    "5ccd98bdb7955cad6751271e04113c94687c331064406a95946654abbae84faa": {
+        "prediction": "cardboard",
+        "confidence": 0.9512428045272827
+    }
+}

@@ -1,0 +1,2 @@
+timestamp,fingerprint,image_path,predicted_label,confidence,actual_label
+2026-09-07T17:07:22.421700,b2023de7e90efba9138279c628555fc2c903f5a69e3820c409b081f0aacfe115,cardboard_00001.jpg,cardboard,0.9472429156303406,cardboard

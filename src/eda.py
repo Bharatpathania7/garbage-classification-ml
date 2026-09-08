@@ -3,17 +3,10 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from PIL import Image
 import numpy as np
-# --------------------------------------------------
-# Configuration
-# --------------------------------------------------
 
 DATASET_PATH = "data/Garbage_Dataset_Classification"
 METADATA_PATH = os.path.join(DATASET_PATH, "metadata.csv")
 
-
-# --------------------------------------------------
-# Load Dataset
-# --------------------------------------------------
 
 df = pd.read_csv(METADATA_PATH)
 
@@ -28,19 +21,11 @@ print("\nColumns:")
 print(df.columns.tolist())
 
 
-# --------------------------------------------------
-# Class Distribution
-# --------------------------------------------------
-
 class_counts = df["label"].value_counts()
 
 print("\nClass Distribution:")
 print(class_counts)
 
-
-# --------------------------------------------------
-# Class Distribution Bar Chart
-# --------------------------------------------------
 
 plt.figure(figsize=(10, 6))
 
@@ -54,9 +39,6 @@ plt.xticks(rotation=45)
 plt.tight_layout()
 plt.show()
 
-# --------------------------------------------------
-# Sample Images from Each Class
-# --------------------------------------------------
 
 IMAGE_PATH = os.path.join(DATASET_PATH, "images")
 
@@ -93,9 +75,6 @@ plt.suptitle("Sample Images from Each Garbage Class")
 plt.tight_layout()
 plt.show()
 
-# --------------------------------------------------
-# Image Brightness Analysis
-# --------------------------------------------------
 
 print("\nCalculating image brightness...")
 
@@ -146,9 +125,6 @@ plt.ylabel("Number of Images")
 
 plt.tight_layout()
 plt.show()
-# --------------------------------------------------
-# Per-Class Brightness Analysis
-# --------------------------------------------------
 
 print("\nCalculating brightness by class...")
 
@@ -188,10 +164,6 @@ for class_name, brightness in class_brightness.items():
     print(f"{class_name}: {brightness:.2f}")
 
 
-# --------------------------------------------------
-# Per-Class Brightness Chart
-# --------------------------------------------------
-
 brightness_series = pd.Series(class_brightness)
 
 plt.figure(figsize=(10, 6))
@@ -206,9 +178,6 @@ plt.xticks(rotation=45)
 plt.tight_layout()
 plt.show()
 
-# --------------------------------------------------
-# RGB Channel Statistics
-# --------------------------------------------------
 
 print("\nCalculating RGB channel statistics...")
 
@@ -248,9 +217,6 @@ print(f"Average Green intensity: {np.mean(green_values):.2f}")
 print(f"Average Blue intensity: {np.mean(blue_values):.2f}")
 
 
-# --------------------------------------------------
-# RGB Channel Comparison
-# --------------------------------------------------
 
 channel_means = [
     np.mean(red_values),
